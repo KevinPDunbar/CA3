@@ -1,0 +1,44 @@
+* { margin: 0; 
+    padding: 0;  }
+
+body { 
+font: 15px Arial; }
+
+form { 
+background: #000; 
+position: fixed; 
+bottom: 0; 
+width: 100%; }
+
+form input {
+padding: 10px;
+width: 80%; 
+margin-right: .5%; }
+
+form button { 
+width: 9%; 
+background-color: greenyellow; 
+ }
+
+#messages { 
+list-style-type: none; 
+}
+
+#messages li { 
+padding: 20px 10px; }
+
+#messages li:nth-child(odd) { 
+background-color: aliceblue; }
+
+#messages { 
+margin-bottom: 40px }
+
+#changeName form {
+    position: top;
+    top: 0;
+}
+
+#numberOfUsers {
+    padding-bottom: 50px;
+}
+    

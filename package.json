@@ -1,0 +1,15 @@
+{
+  "name": "ca3",
+  "version": "1.0.0",
+  "description": "my third ca",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Dunbar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "socket.io": "^1.7.3"
+  }
+}

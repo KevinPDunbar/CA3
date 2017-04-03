@@ -1,0 +1,1 @@
+This application allows multiple users to chat with each other. When the user connects they will be promted to enter a nickname, this will be used as their id. In the bottom of the application there is a text input, the user can type their message here and then click the send button which will send the message to every user in the chat.

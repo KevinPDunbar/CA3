@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Chat Room</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+      <h1 id="numberOfUsers"></h1>
+      <p id="clientId"></p>
+      <div id="clients"></div>  
+      
+    <ul id="messages"></ul>
+    <form id="messageForm"  action="">
+    <input id="message" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+        var socket = io.connect();
+        
+        
+         socket.on('connect', function (data) 
+        {
+             
+            var nickname = prompt("Choose a nickname"); //prompt the user with an input box
+            socket.emit('changeName', { customId:nickname }); //return the value to the changeName function
+         });
+        
+        /*
+         socket.on('connect', function()
+        {
+            document.getElementById("clientId").innerHTML = "This client's ID is " + socket.id;
+         }); */
+        
+         /* //Add a button for each client that is connected to the server
+			 socket.on('clientList', function(data){
+				 document.getElementById("clients").innerHTML = "";
+				 for(var i = 0; i < data.length; i++){
+					 //console.log(data[i]);
+					 var btn = document.createElement("BUTTON"); 
+					 btn.onclick = clientButtonClicked;
+					 var textnode = document.createTextNode(data[i]);
+					 btn.appendChild(textnode);
+					 document.getElementById("clients").appendChild(btn);
+				 }
+			 });*/
+        
+        /*
+        function clientButtonClicked()
+        {
+            //Tell the server this button was clicked and send the client id along with the message
+            socket.emit('clientClicked', this.innerHTML);
+            console.log("Client Clicked");
+         }*/
+        
+      $(function () 
+        {   
+            $('form').submit(function() //when message form is submitted
+            {
+                socket.emit('chat message', $('#message').val()); //send text from message to the chat message function in the server
+                $('#m').val('');
+                return false;
+                
+            });
+            socket.on('chat message', function(msg) //when message is recieved from server
+            {
+                $('#messages').append($('<li>').text(msg)); //create a new list item in messages
+                window.scrollTo(0, document.body.scrollHeight); //scroll to show last message
+            });
+            });
+        
+        socket.on('numUsers', function(numberOfUsers) //when numberOfUsers function is ran from the server
+         {
+             document.getElementById("numberOfUsers").innerHTML = "There are " + numberOfUsers + " users online"; //find the element in the document with the id 'numberOfUsers' and fill it with the numberOfUsers variable.
+        })
+        
+    </script>
+  </body>
+</html>
